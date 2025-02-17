@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../images/logo.svg";
+import { useDispatch } from "react-redux";
+import { searchBooks } from "../redux/filters/actionType";
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState("");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchText(value);
+    dispatch(searchBooks(value));
+  };
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -28,6 +37,8 @@ const Navbar = () => {
               type="text"
               placeholder="Filter books..."
               className="search"
+              onChange={handleChange}
+              value={searchText}
               id="lws-searchBook"
             />
           </div>
