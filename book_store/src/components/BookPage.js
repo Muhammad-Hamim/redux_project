@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BookCard from "./BookCard";
 import { useDispatch, useSelector } from "react-redux";
 import { filterFeaturedBooks } from "../redux/filters/actionType";
+import fetchBooks from "../redux/books/thunk/fetchBooks";
 
 const BookPage = () => {
   const books = useSelector((state) => state.books.books);
   const filters = useSelector((state) => state.filters);
   const dispatch = useDispatch();
-  console.log(filters);
-  console.log(books);
+
+  useEffect(() => {
+    dispatch(fetchBooks);
+  }, [dispatch]);
+
   const filterFeaturedBook = (book) => {
     const { status } = filters;
     switch (status) {
       case "Featured":
         return book.featured;
-      case "All":
-        return true;
       default:
         return true;
     }
@@ -56,12 +58,14 @@ const BookPage = () => {
         </div>
       </div>
       {/* book BookCard */}
-      {books
-        .filter(filterFeaturedBook)
-        .filter(filterSearchBook)
-        .map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
+      {books && books.length > 0 ? (
+        books
+          .filter(filterFeaturedBook)
+          .filter(filterSearchBook)
+          .map((book) => <BookCard key={book.id} book={book} />)
+      ) : (
+        <p>No books available</p>
+      )}
       {/* book BookCard */}
     </div>
   );

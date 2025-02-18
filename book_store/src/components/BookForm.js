@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ADD_BOOK } from "../redux/books/actions";
+import addBookDB from "../redux/books/thunk/addBookDB";
 
 const BookForm = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const BookForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log(e.target);
     setBookInfo({
       ...bookInfo,
       [name]: type === "checkbox" ? checked : value,
@@ -24,8 +23,7 @@ const BookForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(bookInfo);
-    dispatch(ADD_BOOK(bookInfo));
+    dispatch(addBookDB(bookInfo));
   };
 
   return (

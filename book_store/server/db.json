@@ -25,7 +25,25 @@
       "price": 23.99,
       "rating": 4,
       "featured": true,
+      "id": 3
+    },
+    {
+      "name": "No books",
+      "author": "No Author",
+      "thumbnail": "https://pngimg.com/d/book_PNG2111.png",
+      "price": "555",
+      "rating": "5",
+      "featured": true,
       "id": 4
+    },
+    {
+      "name": "No books 2",
+      "author": "No Author 2",
+      "thumbnail": "https://pngimg.com/d/book_PNG2111.png",
+      "price": "4500",
+      "rating": "4",
+      "featured": false,
+      "id": 5
     }
   ]
 }

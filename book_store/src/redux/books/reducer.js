@@ -1,4 +1,4 @@
-import { ADD_BOOK, DELETE_BOOK, EDIT_BOOK } from "./actions";
+import { ADD_BOOK, DELETE_BOOK, EDIT_BOOK, LOAD_BOOKS } from "./actions";
 import initialState from "./initialState";
 
 //generate the book id dynamically
@@ -12,6 +12,11 @@ const generateBookId = (books) => {
 
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+      };
     case ADD_BOOK:
       return {
         ...state,
@@ -23,7 +28,7 @@ const booksReducer = (state = initialState, action) => {
     case DELETE_BOOK:
       return {
         ...state,
-        books: state.books.filter((flight) => flight.id !== action.payload),
+        books: state.books.filter((book) => book.id !== action.payload),
       };
     case EDIT_BOOK:
       //find the book using the id
